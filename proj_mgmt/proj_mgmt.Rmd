@@ -2,7 +2,9 @@
 title: "Project Management"
 author: "Tham, Wei Yang"
 date: "June 14, 2017"
-output: revealjs::revealjs_presentation
+output: 
+  revealjs::revealjs_presentation:
+    incremental: true
 
 ---
 
@@ -17,6 +19,26 @@ knitr::opts_chunk$set(echo = TRUE)
 - Feel confident enough to start your own project
 - Know where to find the tools you need 
 
-## Programming Languages
-- R
+## Digression: Programming Languages
 - Stata
+    + A favorite of the economics profession
+- R
+    + Oriented towards data analysis
+    + I use this :)
+- Python
+    + More general purpose programming
+    
+# Reproducibility
+
+## What is reproducibility?
+- With the same data, you can reproduce the same set of results
+- NOT replicability
+- NOT correctness 
+
+## What does this mean in practice?
+- x
+
+
+
+
+
