@@ -1,0 +1,22 @@
+---
+title: "Project Management"
+author: "Tham, Wei Yang"
+date: "June 14, 2017"
+output: revealjs::revealjs_presentation
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Intro
+
+## Goals
+- Reproducibility and why it's important
+- Feel confident enough to start your own project
+- Know where to find the tools you need 
+
+## Programming Languages
+- R
+- Stata
