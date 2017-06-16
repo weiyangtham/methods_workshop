@@ -1,5 +1,5 @@
 ---
-title: "Project Management"
+title: "Project Management for Economists"
 author: "Tham, Wei Yang"
 date: "June 14, 2017"
 output: 
@@ -15,9 +15,9 @@ knitr::opts_chunk$set(echo = TRUE)
 # Intro
 
 ## Goals
+- Give you a template for organizing your work when you start a project
 - Reproducibility and why it's important
-- Feel confident enough to start your own project
-- Know where to find the tools you need 
+- Practical tools for making your work reproducible
 
 ## Digression: Programming Languages
 - Stata
@@ -35,9 +35,33 @@ knitr::opts_chunk$set(echo = TRUE)
 - NOT replicability
 - NOT correctness 
 
-## What does this mean in practice?
-- x
+## Practical definition
+- You can run your entire workflow, from raw data to final paper, in one keystroke
+- Your project should be self-contained
+     + i.e. you can reproduce your work on any machine in the world
+- There are exceptions, but hold yourself to a high standard
+    + Caveat: don't let the perfect be the enemy of the good
 
+## Why make your project reproducible?
+- Makes your life easier
+- Ensure "correctness" i.e. you're doing what you think you're doing
+- Easy for others to build on your work 
+    + "Others" might include future you!
+    
+# Reproducibility in practice
+
+## Helpful resources
+- [Software Carpentry](https://swcarpentry.github.io/r-novice-gapminder/)
+- [ProjectTemplate](http://projecttemplate.net/index.html)
+
+## Version control
+- Avoid this: file_final_v2_oops_reallyfinal_revised_v7.docx
+- Time travel
+- Saving and loading in a video game
+
+## Version control software
+- Git + Github
+- Free private repository for students
 
 
 
