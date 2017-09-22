@@ -1,7 +1,7 @@
 ---
 title: "Project Management for Economists"
-author: "Tham, Wei Yang"
-date: "June 14, 2017"
+author: "Wei Yang Tham"
+date: "September 29, 2017"
 output: 
   revealjs::revealjs_presentation:
     incremental: true
@@ -15,18 +15,20 @@ knitr::opts_chunk$set(echo = TRUE)
 # Intro
 
 ## Goals
-- Give you a template for organizing your work when you start a project
-- Reproducibility and why it's important
-- Practical tools for making your work reproducible
+- Understand what reproducibility is and why it's important
+- Give you practical tips for organizing your project
+- Have concrete ideas for where to find help and new ideas
 
-## Digression: Programming Languages
+## Quick aside: Choosing a language
 - Stata
-    + A favorite of the economics profession
+    + Heavily used in economics
 - R
     + Oriented towards data analysis
     + I use this :)
 - Python
     + More general purpose programming
+- If you follow me online, my biases are well-known
+- Pick something and get really good at it
     
 # Reproducibility
 
@@ -35,33 +37,66 @@ knitr::opts_chunk$set(echo = TRUE)
 - NOT replicability
 - NOT correctness 
 
-## Practical definition
+## Practical goals of reproducibility
 - You can run your entire workflow, from raw data to final paper, in one keystroke
 - Your project should be self-contained
      + i.e. you can reproduce your work on any machine in the world
-- There are exceptions, but hold yourself to a high standard
-    + Caveat: don't let the perfect be the enemy of the good
 
-## Why make your project reproducible?
-- Makes your life easier
+## Don't let the perfect be the enemy of the good
+- Reproducibility tools take time and effort to learn
+- Sometimes project-specific constraints make it difficult to attain an idealized version of reproducibility (e.g. data is on a remote machine)
+
+## Reproducibility makes your life easier
 - Ensure "correctness" i.e. you're doing what you think you're doing
-- Easy for others to build on your work 
-    + "Others" might include future you!
+- Easy for others to trace your steps and build on your work
+- "Others" includes future you!
     
-# Reproducibility in practice
+# Reproducibility in practice: Walkthrough in R/RStudio
 
-## Helpful resources
+## What if you're not using R?
+- These principles are applicable across languages
+- Check out Project Manager in Stata
+
+## Create a new project
+- File > New Project
+
+![asdf][1]
+
+[1]: start_project.png
+
+## Organize your files
+- Keep raw data, programs, and documents separate
+- Keep functions separate from other programs
+
+## Helpful links
 - [Software Carpentry](https://swcarpentry.github.io/r-novice-gapminder/)
 - [ProjectTemplate](http://projecttemplate.net/index.html)
 
 ## Version control
 - Avoid this: file_final_v2_oops_reallyfinal_revised_v7.docx
-- Time travel
-- Saving and loading in a video game
+- Time travel, or saving and loading in a video game
+- Great if you have to work on multiple computers
 
 ## Version control software
 - Git + Github
 - Free private repository for students
+
+## Git is intimidating
+- Start small; I literally use two commands 99% of the time
+
+## Dynamic documents
+- Integrate code and prose
+
+# Coding
+
+## Coding style
+- Look up style guides for whatever language you use
+- You may get conflicting advice on style; most important thing is to be consistent
+
+## Defensive coding
+
+## Cautionary note on Stata
+- Wildcards can lead to unclear code  
 
 
 
