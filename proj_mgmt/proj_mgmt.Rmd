@@ -19,7 +19,11 @@ knitr::opts_chunk$set(echo = TRUE)
 - Give you practical tips for organizing your project
 - Have concrete ideas for where to find help and new ideas
 
-## Quick aside: Choosing a language
+## Caveat
+- I'm no reproducibility guru...
+- ...but hopefully I can share a few tips to make your life easier
+
+## 2nd years: Choosing a language
 - Stata
     + Heavily used in economics
 - R
@@ -27,8 +31,7 @@ knitr::opts_chunk$set(echo = TRUE)
     + I use this :)
 - Python
     + More general purpose programming
-- If you follow me online, my biases are well-known
-- Pick something and get really good at it
+- Pick one and get really good at it; you can learn another language later
     
 # Reproducibility
 
@@ -51,22 +54,28 @@ knitr::opts_chunk$set(echo = TRUE)
 - Easy for others to trace your steps and build on your work
 - "Others" includes future you!
     
-# Reproducibility in practice: Walkthrough in R/RStudio
+# Reproducibility workflow in R/RStudio
 
 ## What if you're not using R?
 - These principles are applicable across languages
-- Check out Project Manager in Stata
+- Some will have similar tools or tools may be common across languages
+- E.g. check out Project Manager in Stata
 
-## Create a new project
-- File > New Project
+## Projects
+- Use RStudio's *Projects* feature
+- Easy to keep your projects organized separately
+- Can open multiple sessions at the same time
 
-![asdf][1]
-
-[1]: start_project.png
-
-## Organize your files
-- Keep raw data, programs, and documents separate
-- Keep functions separate from other programs
+## Folder structure principles
+- Most basic: separate folders for code, data, output
+- Additional rules you can apply
+    + separate raw and intermediate data 
+    + separate types of code e.g. cleaning and analysis
+    
+## Creating a new project
+```{r, echo = FALSE, out.width = "700px"}
+knitr::include_graphics("start_project.png")
+```
 
 ## Helpful links
 - [Software Carpentry](https://swcarpentry.github.io/r-novice-gapminder/)
@@ -92,6 +101,23 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Coding style
 - Look up style guides for whatever language you use
 - You may get conflicting advice on style; most important thing is to be consistent
+
+## Projects set your home directory
+```{r, eval = FALSE}
+# Type this in your console after opening a project
+getwd()
+```
+
+```{r, echo = FALSE}
+here::here()
+```
+
+- You can save a script in any subfolder in the project directory and it will always start from the project's root directory
+
+## Use relative directories!
+- Suppose you want to load a file from the `data` folder
+- `"data/file.csv"`
+- Not `"/Users/weiyangtham/Documents/Projects/file.csv"`
 
 ## Defensive coding
 
