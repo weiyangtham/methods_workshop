@@ -12,7 +12,13 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Good tables and figures are an essential component of every paper. In general, I prefer figures to tables, especially for presenting regression coefficients. I find that most economists use tables too often for my liking, both in papers and presentations. In this document, we'll focus mostly on how to make plots in R with the `ggplot2` package and how to integrate them into a document. We'll use other data-wrangling tools from the `tidyverse` where necessary. We'll do a little bit on tables at the end. 
+Good tables and figures are an essential component of every paper. In general, I prefer figures to tables, especially for presenting regression coefficients. I find that most economists use tables too often for my liking, both in papers and presentations. In this document, we'll focus mostly on how to make plots in R with the `ggplot2` package and how to integrate them into a document. We'll use other data-wrangling tools from the `tidyverse` where necessary. We'll do a little bit on tables at the end.
+
+Other resources, some of which I've drawn upon for this workshop:
+
+- Karthik Ram's [slides](https://speakerdeck.com/karthik/introduction-to-ggplot2)
+- [R for Data Science](http://r4ds.had.co.nz/data-visualisation.html)
+- [Harvard Institute for Quantitative Social Science tutorials](http://tutorials.iq.harvard.edu/R/Rgraphics/Rgraphics.html#statistical_transformations)
 
 ## Why ggplot2?
 
@@ -113,6 +119,9 @@ ggplot(data = filter(gapminder, year == 1997),
 
 ### Lines
 
+Let's look at average worldwide life expectancy over time. We'll calculate mean life expectancy each year and 
+then 95\% confidence intervals.
+
 ```{r}
 
 lifexp = gapminder %>% 
@@ -123,12 +132,32 @@ lifexp = mutate(lifexp,
                      lifexp_upperci = lifexp_mean + 1.96*lifexp_se, 
                      lifexp_lowerci = lifexp_mean - 1.96*lifexp_se)
 
+lifexp
+
 ```
 
 ```{r}
 ggplot(lifexp, aes(year, lifexp_mean)) + 
   geom_line() 
 ```
+
+You'll often want to show the confidence intervals e.g. if you have regression coefficients from an event study. 
+
+```{r}
+ggplot(lifexp, aes(year, lifexp_mean)) + 
+  geom_line() + 
+  geom_ribbon(aes(ymin = lifexp_lowerci, ymax = lifexp_upperci), alpha = 1/10, fill = "blue")
+```
+
+You can also do errorbars.
+
+```{r}
+ggplot(lifexp, aes(year, lifexp_mean)) + 
+  geom_line() + 
+  geom_errorbar(aes(ymax = lifexp_upperci, ymin = lifexp_lowerci), linetype = 2)
+```
+
+You can also plot the confidence intervals as lines.
 
 ```{r}
 ggplot(lifexp, aes(year, lifexp_mean)) + 
@@ -137,20 +166,16 @@ ggplot(lifexp, aes(year, lifexp_mean)) +
   geom_line(aes(year, lifexp_lowerci), linetype = 2, color = "red")
 ```
 
-You can also do errorbars.
-
-```{r}
-ggplot(lifexp, aes(year, lifexp_mean)) + 
-  geom_line() + 
-  geom_errorbar(aes(ymax = lifexp_upperci, ymin = lifexp_lowerci), alpha = 1/2, linetype = 2)
-```
-
-Making it three lines is also doable
+### Bars
 
 ```{r}
 
-```
+gm2007 = filter(gapminder, year == 2007)
 
+ggplot(gm2007, aes()) + 
+  geom_col(aes(x = country, y = gdpPercap))
+
+```
 
 
 # Tables
