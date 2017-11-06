@@ -1,0 +1,165 @@
+---
+title: "Tables and figures in R"
+author: "Tham, Wei Yang"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+output:
+  html_document: default
+editor_options:
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Good tables and figures are an essential component of every paper. In general, I prefer figures to tables, especially for presenting regression coefficients. I find that most economists use tables too often for my liking, both in papers and presentations. In this document, we'll focus mostly on how to make plots in R with the `ggplot2` package and how to integrate them into a document. We'll use other data-wrangling tools from the `tidyverse` where necessary. We'll do a little bit on tables at the end. 
+
+## Why ggplot2?
+
+ggplot2 is based on the grammar of graphics, a phrase coined by Lee Wilkinson. The "grammer" means there is an underlying logic to building a plot. This makes it easier to understand the code used to build a plot, and a lot less effort to memorize arbitrary commands. 
+
+ggplot2 also comes with nice defaults. This means it takes a lot less work get your graphic to a stage where you're satisfied. It's also just a lot more fun to be able to make nice graphs without too much effort. If you want some tips on taking a ggplot2 figure to the next level, check out [this tutorial](https://hopstat.wordpress.com/2016/02/18/how-i-build-up-a-ggplot2-figure/)
+
+## Basics
+- `ggplot()` - main function where you specify the dataset and variables to plot
+- `geoms` - geometric objects
+    + E.g. `geom_point()`, `geom_bar()`, `geom_line()`
+- `aes` - aesthetics
+    + shape, transparency (alpha), color, fill, linetype
+- scales - continuous, discrete, log
+- **Side note** - Don't use `qplot()`. Stands for "quick plot", but tricky to add complexity
+
+## Getting started
+
+We'll start with the `gapminder` dataset, which you can get by installing the `gapminder` package. Make sure you have the `tidyverse` packages too.
+
+```{r, eval = FALSE}
+install.packages("tidyverse")
+install.packages("gapminder")
+
+```
+
+Take a quick peek at the dataset
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(gapminder)
+gapminder
+```
+
+
+### Creating a plot
+```{r}
+ggplot(gapminder)
+```
+
+Ha! Sorry. Try this instead.
+
+```{r}
+ggplot(data = filter(gapminder, year == 1997), 
+       mapping = aes(x = lifeExp, y = gdpPercap)) + 
+  geom_point() 
+```
+
+`ggplot()` creates a coordinate system that you can add layers to. To create a graph, you need to specify your
+
+- `data`
+- `mapping` - this defines how variables in your dataset are mapped to visual properties (in this case, the x and y axes)
+
+### Points
+
+- Increase the size
+
+```{r}
+ggplot(data = filter(gapminder, year == 1997), 
+       mapping = aes(x = lifeExp, y = gdpPercap)) + 
+  geom_point(size = 5) 
+```
+
+- Different colours by continent
+```{r}
+ggplot(data = filter(gapminder, year == 1997), 
+       mapping = aes(x = lifeExp, y = gdpPercap, colour = continent)) + 
+  geom_point() 
+```
+
+Try this:
+
+```{r}
+ggplot(data = filter(gapminder, year == 1997), 
+       mapping = aes(x = lifeExp, y = gdpPercap)) + 
+  geom_point(color = "red") 
+```
+
+and this:
+
+```{r}
+ggplot(data = filter(gapminder, year == 1997), 
+       mapping = aes(x = lifeExp, y = gdpPercap, color = "blue")) + 
+  geom_point() 
+```
+
+#### Point aesthetics
+
+Different geoms understand different aesthetics. Type `?geom_point` in your console and scroll down to the `Aesthetics` section. The help document says that `geom_point` understands the shape aesthetic, so we can differentiate continents by shapes *and* colours. Shapes are helpful to accommodate black-and-white versions of your paper.
+
+```{r}
+ggplot(data = filter(gapminder, year == 1997), 
+       mapping = aes(x = lifeExp, y = gdpPercap, shape = continent, color = continent)) + 
+  geom_point() 
+```
+
+
+
+### Lines
+
+```{r}
+
+lifexp = gapminder %>% 
+  group_by(year) %>% 
+  summarize(lifexp_mean = mean(lifeExp), lifexp_se = sd(lifeExp)/sqrt(n()))
+
+lifexp = mutate(lifexp, 
+                     lifexp_upperci = lifexp_mean + 1.96*lifexp_se, 
+                     lifexp_lowerci = lifexp_mean - 1.96*lifexp_se)
+
+```
+
+```{r}
+ggplot(lifexp, aes(year, lifexp_mean)) + 
+  geom_line() 
+```
+
+```{r}
+ggplot(lifexp, aes(year, lifexp_mean)) + 
+  geom_line() + 
+  geom_line(aes(year, lifexp_upperci), linetype = 2, color = "red") + 
+  geom_line(aes(year, lifexp_lowerci), linetype = 2, color = "red")
+```
+
+You can also do errorbars.
+
+```{r}
+ggplot(lifexp, aes(year, lifexp_mean)) + 
+  geom_line() + 
+  geom_errorbar(aes(ymax = lifexp_upperci, ymin = lifexp_lowerci), alpha = 1/2, linetype = 2)
+```
+
+Making it three lines is also doable
+
+```{r}
+
+```
+
+
+
+# Tables
+
+```{r}
+mtcars
+```
+
+
+
+
+
