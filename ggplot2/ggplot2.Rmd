@@ -9,7 +9,7 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, fig.width = 6, fig.asp = 0.618)
 ```
 
 Good tables and figures are an essential component of every paper. In general, I prefer figures to tables, especially for presenting regression coefficients. I find that most economists use tables too often for my liking, both in papers and presentations. In this document, we'll focus mostly on how to make plots in R with the `ggplot2` package and how to integrate them into a document. We'll use other data-wrangling tools from the `tidyverse` where necessary. We'll do a little bit on tables at the end.
@@ -47,7 +47,7 @@ install.packages("gapminder")
 
 Take a quick peek at the dataset
 
-```{r, warning=FALSE, message=FALSE}
+```{r libs, warning=FALSE, message=FALSE}
 library(tidyverse)
 library(gapminder)
 gapminder
@@ -55,7 +55,10 @@ gapminder
 
 
 ### Creating a plot
-```{r}
+
+Try creating your first plot with this code.
+
+```{r, eval = FALSE}
 ggplot(gapminder)
 ```
 
@@ -79,7 +82,8 @@ ggplot(data = filter(gapminder, year == 1997),
 ```{r}
 ggplot(data = filter(gapminder, year == 1997), 
        mapping = aes(x = lifeExp, y = gdpPercap)) + 
-  geom_point(size = 5) 
+  geom_point(size = 5) + 
+  ggtitle("For dramatic effect")
 ```
 
 - Different colours by continent
@@ -164,25 +168,131 @@ ggplot(lifexp, aes(year, lifexp_mean)) +
   geom_line() + 
   geom_line(aes(year, lifexp_upperci), linetype = 2, color = "red") + 
   geom_line(aes(year, lifexp_lowerci), linetype = 2, color = "red")
+
 ```
 
 ### Bars
 
+Let's use the `nycflights13` package. Which New York airport had the most number of flights originating from it?
+
 ```{r}
 
-gm2007 = filter(gapminder, year == 2007)
+# install.packages(nycflights13)
+library(nycflights13)
 
-ggplot(gm2007, aes()) + 
-  geom_col(aes(x = country, y = gdpPercap))
+ggplot(flights) + geom_bar(aes(origin))
+
+```
+
+Notice that the counting has been done for you. If you want to display values that are already in the data, use
+`geom_col`. 
+
+```{r}
+origins = count(flights, origin)
+
+origin_plot = ggplot(origins, aes(origin, n)) + geom_col()
+origin_plot
+
+# Same thing
+# ggplot(origins, aes(origin, n)) + 
+#   geom_bar(stat = "identity")
+```
+
+You might want to flip the bars. 
+
+```{r}
+origins %>% 
+  mutate(origin = reorder(origin, n)) %>% 
+  ggplot(aes(origin, n)) + geom_col() + coord_flip()
+```
+
+
+### "3D" plots
+
+ggplot does not have 3D plots, but has geoms for visualizing 3D surfaces in 2D. I often find 2D surfaces to be more interpretable than 3D surfaces anyway. I like heat maps, which you can draw with `geom_raster`. 
+
+```{r}
+delays_heatmap = flights %>% 
+  group_by(month, day) %>% 
+  summarise(dep_delay = mean(dep_delay, na.rm = TRUE), n = n()) %>%  
+  ggplot(aes(day, as.factor(month))) + geom_raster(aes(fill = dep_delay)) + 
+  ggtitle("Average departure delay from JFK for each month-day of 2013") 
+
+delays_heatmap
 
 ```
 
 
-# Tables
+### Themes
+
+There are many options for deviating from the default grey theme. For papers, I like to use light backgrounds so that color printing is not an issue. 
 
 ```{r}
-mtcars
+origin_plot + theme_minimal()
 ```
+
+If you want to change the theme for **all** of your images, use `theme_set()` at the beginning of your code. Copy and paste the code below at the end of the code chunk named `libs` (where we loaded the packages) and knit this `.rmd` file. 
+
+```{r, eval = FALSE}
+theme_set(theme_classic())
+```
+
+There are themes that come with [ggplot2](http://ggplot2.tidyverse.org/reference/ggtheme.html) and there are also lots other options out there like the `ggthemes` package. 
+
+## Tables
+
+There are a number of helpful tools for making nice tables, but as you've seen with the gapminder dataset, if you're just writing an informal report you can just print the object you want to show and it'll come out pretty neatly. Just to recap:
+
+```{r}
+gapminder
+```
+
+Another option is `kable` from the `knitr` package. 
+
+```{r}
+knitr::kable(head(gapminder)) # without head() will print out entire dataframe
+```
+
+`stargazer` is probably your best option for making journal-quality tables. One of its main selling points is that can take regression output directly and convert that into your standard regression table. However, it has some idiosycrasies that can occasionally be inconvenient. Notice below how I have to specify `results = 'asis'` in the chunk options, and `type = "html"` in the function. The latter means that if I want to knit this document as a pdf instead then I have to change the stargazer options. 
+<!--
+<pre><code>```{r, results = 'asis'}
+toymodel = lm(lifeExp ~ gdpPercap, data = gapminder)
+
+stargazer::stargazer(toymodel, type = "html",
+ title = "Table with stargazer")
+```</code></pre> 
+-->
+
+    ```{r, results = 'asis'}`r ''`
+    toymodel = lm(lifeExp ~ gdpPercap, data = gapminder)
+    
+    stargazer::stargazer(toymodel, type = "html", title = "Table with stargazer")
+    ```
+
+```{r, results = 'asis'}
+toymodel = lm(lifeExp ~ gdpPercap, data = gapminder)
+
+stargazer::stargazer(toymodel, type = "html", title = "Table with stargazer")
+```
+
+`stargazer` has a ton of options that you can tweak. The [cheatsheet from Jake Russ (which you can see below)](http://www.jakeruss.com/cheatsheets/stargazer/) is super helpful.
+
+<iframe src = "http://www.jakeruss.com/cheatsheets/stargazer/", style = "width:900px; height:700px"></iframe>
+
+This is also a good opportunity to show you the `broom` package (by David Robinson) for working with regression output. This is one of my favorite packages in R. The `tidy` function converts your regression output into a data frame, making it extremely easy to work with. In particular, it becomes straightforward to plot your coefficients. 
+
+```{r}
+toymodel_df = broom::tidy(toymodel)
+
+ggplot(filter(toymodel_df, term == "gdpPercap"), 
+       aes(term, estimate, ymin = estimate - 2*std.error, ymax = estimate + 2*std.error)) + 
+  geom_point() + geom_errorbar() + 
+  geom_hline(yintercept = 0, linetype = 2) + 
+  ggtitle("gdpPercap estimate is statistically significant")
+```
+
+Of course, this isn't a very helpful graph since there's only one coefficient, but it's easy to think of situations where it'd be super helpful e.g. event study with different estimates for each point in time.
+
 
 
 
