@@ -19,6 +19,11 @@ Other resources, some of which I've drawn upon for this workshop:
 - Karthik Ram's [slides](https://speakerdeck.com/karthik/introduction-to-ggplot2)
 - [R for Data Science](http://r4ds.had.co.nz/data-visualisation.html)
 - [Harvard Institute for Quantitative Social Science tutorials](http://tutorials.iq.harvard.edu/R/Rgraphics/Rgraphics.html#statistical_transformations)
+- [Building up a ggplot2 figure from its defaults](https://hopstat.wordpress.com/2016/02/18/how-i-build-up-a-ggplot2-figure/)
+- [The ggplot2 page](http://ggplot2.tidyverse.org/)
+- [Karl Broman's tips for figures and tables](http://kbroman.org/knitr_knutshell/pages/figs_tables.html)
+- [stargazer cheatsheet for building tables](http://www.jakeruss.com/cheatsheets/stargazer/)
+
 
 ## Why ggplot2?
 
