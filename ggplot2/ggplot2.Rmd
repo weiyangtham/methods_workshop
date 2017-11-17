@@ -161,7 +161,7 @@ ggplot(lifexp, aes(year, lifexp_mean)) +
   geom_errorbar(aes(ymax = lifexp_upperci, ymin = lifexp_lowerci), linetype = 2)
 ```
 
-You can also plot the confidence intervals as lines.
+You can also plot the confidence intervals as lines. I am working on a geom that does this (and I'm really close!), but for now you have this workaround. 
 
 ```{r}
 ggplot(lifexp, aes(year, lifexp_mean)) + 
