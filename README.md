@@ -12,6 +12,7 @@ Listed below are helpful links organized by topic.
 
 ## Reproducible research
 
+- [Workshop slides](http://rpubs.com/weiyangtham/313488)
 - [Software Carpentry](https://swcarpentry.github.io/r-novice-gapminder/)
 - [ProjectTemplate](http://projecttemplate.net/index.html)
 - [Defensive Programming](https://thepoliticalmethodologist.com/2016/06/06/embrace-your-fallibility-thoughts-on-code-integrity/)
@@ -23,6 +24,7 @@ Listed below are helpful links organized by topic.
 
 ## Data visualization with ggplot2
 
+- [Workshop walkthrough](http://rpubs.com/weiyangtham/339193)
 - Karthik Ram's [slides](https://speakerdeck.com/karthik/introduction-to-ggplot2)
 - [Harvard Institute for Quantitative Social Science tutorials](http://tutorials.iq.harvard.edu/R/Rgraphics/Rgraphics.html#statistical_transformations)
 - [Building up a ggplot2 figure from its defaults](https://hopstat.wordpress.com/2016/02/18/how-i-build-up-a-ggplot2-figure/)
