@@ -47,10 +47,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Don't let the perfect be the enemy of the good
 - Reproducibility tools take time and effort to learn
-- Sometimes project-specific constraints make it difficult to attain an idealized version of reproducibility (e.g. data is on a remote machine)
+- Sometimes project-specific constraints make it difficult to attain an idealized version of reproducibility 
 
 ## Reproducibility makes your life easier
-- Ensure "correctness" i.e. you're doing what you think you're doing
+- Ensures "correctness" i.e. you're doing what you think you're doing
 - Easy for others to trace your steps and build on your work
 - "Others" includes future you!
     
@@ -77,30 +77,52 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::include_graphics("start_project.png")
 ```
 
-## Helpful links
-- [Software Carpentry](https://swcarpentry.github.io/r-novice-gapminder/)
-- [ProjectTemplate](http://projecttemplate.net/index.html)
-
 ## Version control
 - Avoid this: file_final_v2_oops_reallyfinal_revised_v7.docx
-- Time travel, or saving and loading in a video game
-- Great if you have to work on multiple computers
+- Like time travel, or saving and loading in a video game
+    + Can even create alternate timelines to test your code
+- Easy to keep code on multiple computers updated
 
 ## Version control software
 - Git + Github
-- Free private repository for students
+- Git is a version control system
+- Github is an online version control repository
 
 ## Git is intimidating
-- Start small; I literally use two commands 99% of the time
+- Start small; I use two commands (`push` and `pull`) 99% of the time
+- Using a Git client like GitKraken can make it more intuitive
+- More [at this link](http://happygitwithr.com/) for getting started with Git/Github
 
 ## Dynamic documents
+- Don't cut and paste figures/tables/numbers - easy to make mistakes
 - Integrate code and prose
+- Any changes to your data will be automatically reflected in the text
+- In R this is done with R Markdown
+
+## Example 
+- I want to say: The flights dataset has `N` observations and `K` variables
+```{r ex2a}
+library(nycflights13)
+dim(flights)
+```
+
+- The `flights` dataset has `` `r '\x60r dim(flights)[1]\x60'` ``  observations and `` `r '\x60r dim(flights)[2]\x60'` `` variables
+- The `flights` dataset has `r nrow(flights)` observations and `r ncol(flights)` variables
 
 # Coding
 
 ## Coding style
 - Look up style guides for whatever language you use
-- You may get conflicting advice on style; most important thing is to be consistent
+- You may get conflicting advice on style; just be consistent
+- E.g. in R, many style guides will say `x <- 5`, but a substantial minority say `x = 5` - just choose one
+- Human-readable; with auto-complete, object names can be a bit longer
+- [This is a problem with STATA wildcards](https://weiyangtham.github.io/verbosity-code/)
+
+## Defensive coding
+- Mistakes will happen - your goal is not to write mistake-free code, but to write code that catches those mistakes early
+- Insert tests in your code - e.g. after merging two datasets, a line that stops the code from running if some observations were not matched
+- Readable code makes mistakes easier to spot
+- Don't transcribe
 
 ## Projects set your home directory
 ```{r, eval = FALSE}
@@ -119,11 +141,12 @@ here::here()
 - `"data/file.csv"`
 - Not `"/Users/weiyangtham/Documents/Projects/file.csv"`
 
-## Defensive coding
-
-## Cautionary note on Stata
-- Wildcards can lead to unclear code  
-
+## Helpful links
+- [Software Carpentry](https://swcarpentry.github.io/r-novice-gapminder/)
+- [ProjectTemplate](http://projecttemplate.net/index.html)
+- [Defensive Programming](https://thepoliticalmethodologist.com/2016/06/06/embrace-your-fallibility-thoughts-on-code-integrity/)
+- [Opinionated Analysis Development by Hilary Parker](https://peerj.com/preprints/3210/)
+- [Gentzkow and Shapiro guide](http://www.brown.edu/Research/Shapiro/pdfs/CodeAndData.pdf)
 
 
 
