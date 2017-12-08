@@ -18,6 +18,7 @@ Listed below are helpful links organized by topic.
 - [Opinionated Analysis Development by Hilary Parker](https://peerj.com/preprints/3210/)
 - [Gentzkow and Shapiro guide](http://www.brown.edu/Research/Shapiro/pdfs/CodeAndData.pdf)
 - [Happy Git with R](http://happygitwithr.com/) 
+- [Github deals for students](https://education.github.com/)
 - [R Notebooks/R Markdown](http://rmarkdown.rstudio.com/r_notebooks.html)
 
 ## Data visualization with ggplot2
