@@ -44,8 +44,14 @@ git config --global user.email 'weiyang.tham@gmail.com'
 git config --global --list
 ```
 
-## Git client (aka make your life easier)
-- adf
+## Git client
+- Minimize having to deal with command line
+- Makes version control a lot more intuitive by visualizing it
+- You can have a GUI and also do stuff from the command line if you have to
+- [GitKraken](https://www.gitkraken.com/) is a good option for us as it works across all Windows, Mac, and Linux
+- If you use R, RStudio has a simple Git GUI 
+- DO NOT use the free Github client
+- More Git clients [here](http://happygitwithr.com/git-client.html)
 
 ## .gitignore
 
