@@ -9,7 +9,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
 ## Resources
@@ -30,15 +30,23 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduce yourself to Git
 
+Run the code below in your [shell](http://happygitwithr.com/shell.html). 
+
 - `user.name`: use some version of your real name so we know who is making changes
 - `user.email`: you **MUST** use the email associated with your Github account
 
 ```{bash, eval = FALSE}
 git config --global user.name 'weiyangtham'
 git config --global user.email 'weiyang.tham@gmail.com'
+```
+
+```{bash, eval = TRUE}
 git config --global --list
 ```
 
-## gitignore
+## Git client (aka make your life easier)
+- adf
+
+## .gitignore
 
 
