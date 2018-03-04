@@ -1,11 +1,13 @@
 ---
-title: ""
-author: "Tham, Wei Yang"
-date: "January 15, 2018"
-output: 
+title: "Version Control for Economists Workshop"
+author: "Wei Yang Tham"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+output:
   html_document:
     toc: true
     toc_float: true
+  # revealjs::revealjs_presentation:
+    # incremental: true
 ---
 
 ```{r setup, include=FALSE}
@@ -17,15 +19,27 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 - [Excuse me, do you have a moment to talk about version control?](https://peerj.com/preprints/3159.pdf)
 - [git vs. Dropbox from a researcher's perspective](https://michaelstepner.com/blog/git-vs-dropbox)
 
-## Set up a Github account
+# What is version control?
 
+## What is Git? What is Github?
+- Git is a version control system
+- Github is a hosting service for Git repositories
+- " GitHub is like DropBox or Google Drive, but more structured, powerful, and programmatic"
+
+## Why does this matter for research?
+- Git was built for collaborative software development; it has been re-purposed for data science and various kinds of empirical research including in economics
+- Git is very powerful, maybe "too powerful" for our purposes
+- Our aim is not total mastery of Git
+
+# Setting up Git and Github
+
+## Set up a Github account
 - [https://github.com/](https://github.com/)
 - [Some tips here](http://happygitwithr.com/github-acct.html)
     + Try to get your username right the first time!
 - Academia gets free private repos: request from [https://education.github.com/](https://education.github.com/)
 
 ## Install Git
-- This is where I will be least helpful, especially for Windows users
 - [Follow this section of Happy Git with R closely](http://happygitwithr.com/install-git.html)
 
 ## Introduce yourself to Git
@@ -40,18 +54,41 @@ git config --global user.name 'weiyangtham'
 git config --global user.email 'weiyang.tham@gmail.com'
 ```
 
-```{bash, eval = TRUE}
+```{bash, eval = F}
 git config --global --list
 ```
 
 ## Git client
+- [GitKraken](https://www.gitkraken.com/) is a good option for us as it works across all Windows, Mac, and Linux
 - Minimize having to deal with command line
 - Makes version control a lot more intuitive by visualizing it
 - You can have a GUI and also do stuff from the command line if you have to
-- [GitKraken](https://www.gitkraken.com/) is a good option for us as it works across all Windows, Mac, and Linux
 - If you use R, RStudio has a simple Git GUI 
 - DO NOT use the free Github client
 - More Git clients [here](http://happygitwithr.com/git-client.html)
+
+# Your first Github commit
+
+## Create a repository on Github
+- Go to your Github account: https://github.com/yourname
+- Click on "Repositories"
+- Click on the green "New" button
+- Check "Initialize this repository with a README"
+
+![](newrepo.png)
+
+- Click "Create Repository"
+- Congratulations! You have made your first Github repository! `r emo::ji("popper")` ``r emo::ji("confetti")`
+
+## Clone your Github repo
+- Click "Clone or download" and copy the URL that appears
+- Open Gitkraken
+- Click the folder `r emo::ji("folder")` icon and select "Clone"
+- Select the directory where you want to store your project
+    + For example, I have a "Projects" directory where I keep all my projects
+    + Note, you DO NOT have to manually create a folder for the `workshop_example` repo
+    
+![](gitkraken_clone.png)
 
 ## .gitignore
 
